@@ -7,22 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@ToString
-@EqualsAndHashCode
 @Entity
 public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
 	@NotNull

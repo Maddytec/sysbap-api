@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,16 +26,19 @@ public class ClientesResource {
 	private Clientes clientes;
 	
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
 	public List<Cliente> listar(){
 		return clientes.findAll();
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
 	public Cliente findById(@PathVariable @Valid Long id) {
 		return clientes.findById(id).orElse(null);
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public Cliente adicionar(@RequestBody @Valid Cliente cliente) {
 		return clientes.save(cliente);
 	}
